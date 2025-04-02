@@ -1,0 +1,30 @@
+name:   Chocolatine
+run-name: ${{ github.actor }} -> Chocolatine is running on ${{ github.repository }}
+on: [push, pull_request]
+jobs:
+    check_coding_style:
+      if: github.repository != 'EpitechPGEPromo2029/B-DOP-200-PAR-2-1-chocolatine-victor.ripert' && !startsWith(github.repository, 'ga-ignore-')
+      runs-on: ghcr.io/epitech/coding-style-checker:latest
+      steps:
+        - name: Checkout
+          uses: actions/checkout@v4
+          with:
+            fetch-depth: 0
+        - name: execute check.sh
+          run: check.sh $(pwd) $(pwd)
+        - name: parse and display coding-style-reports.log
+          run : |
+            test = cat coding-style-reports.log
+            for line in test; do
+              echo line
+            done
+        - name: remove coding-style-reports.log
+          run : rm coding-style-reports.log
+    # second_job:
+    #   needs: check_coding_style
+    #   runs-on: ubuntu-latest
+    #   steps:
+    #     - name: Checkout
+    #       uses: actions/checkout@v4
+    #       with:
+    #         fetch-depth: 0
