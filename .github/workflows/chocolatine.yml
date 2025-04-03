@@ -3,7 +3,7 @@ run-name: ${{ github.actor }} -> Chocolatine is running on ${{ github.repository
 on: [push, pull_request]
 jobs:
     check_coding_style:
-      runs-on: ghcr.io/epitech/coding-style-checker:latest
+      runs-on: ubuntu-latest
       steps:
         - name: Checkout
           uses: actions/checkout@v4
