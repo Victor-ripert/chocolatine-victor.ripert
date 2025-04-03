@@ -27,7 +27,8 @@ jobs:
             file = open("coding-style-reports.log", "r")
             print("Fichier coding style ouvert ??")
             print(file)
-            for line in file :
+            line_list = file.readlines()
+            for line in line_list :
               print("dans boucle")
               info = line.split(':')
               print(f"::error file={info[0]},line={info[1]},title={info[2]}::{info[3]}")
