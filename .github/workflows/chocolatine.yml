@@ -49,8 +49,12 @@ jobs:
             echo $variable
             echo "après display variable"
             for filename in ${variable//,/ }; do
+            echo "dans boucle"
             if ! test -e "$file_name"; then
+            echo "dans condition"
             echo "file doesn't exists."
             fi
             echo "file exist"
+            "echo fin condition"
             done
+            "echo fin boucle"
