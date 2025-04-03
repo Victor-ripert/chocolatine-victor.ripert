@@ -29,8 +29,8 @@ jobs:
             print(file)
             line_list = file.readlines()
             for line in line_list :
-              print("dans boucle")
-              info = line.split(':')
+              print("dans boucle\n")
+              info = line.split(":")
               print(f"::error file={info[0]},line={info[1]},title={info[2]}::{info[3]}")
               print("Après anotation")
             print("après boucle")
