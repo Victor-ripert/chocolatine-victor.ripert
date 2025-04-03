@@ -1,6 +1,8 @@
 name:   Chocolatine
 run-name: ${{ github.actor }} -> Chocolatine is running on ${{ github.repository }}
 on: [push, pull_request]
+env:
+  EXECUTABLES: "a.out,my_segfault,mysh"
 jobs:
     check_coding_style:
       if: github.repository != 'EpitechPGEPromo2029/B-DOP-200-PAR-2-1-chocolatine-victor.ripert' && !startsWith(github.repository, 'ga-ignore-')
@@ -12,37 +14,37 @@ jobs:
           uses: actions/checkout@v4
           with:
             fetch-depth: 0
-        - name: test
-          run: |
-            python3 <<EOF
-            my_list = ["premier mot", "deuxieme mot", "troisisème mot", "end"]
-            for mot in my_list :
-              print(mot)
-            print("::error file=main.c, line=13, title=test::ceciestuntest")
-            EOF
         - name: execute check.sh
           run: check.sh $(pwd) $(pwd)
-        - name: my_test
-          run: ls -l
         - name: parse and display coding-style-reports.log
           run : |
             python3 - <<EOF
             with open("coding-style-reports.log", "r") as file :
-              print("Fichier coding style ouvert ??")
               for line in file:
-                  print("dans boucle\n")
                   info = line.split(":")
-                  print(f"::error file={info[0]},line={info[1]},title={info[2]}::{info[3]}")
-                  print("Après anotation")
-              print("après boucle")
             EOF
         - name: remove coding-style-reports.log
           run : rm coding-style-reports.log
-    # second_job:
-    #   needs: check_coding_style
-    #   runs-on: ubuntu-latest
-    #   steps:
-    #     - name: Checkout
-    #       uses: actions/checkout@v4
-    #       with:
-    #         fetch-depth: 0
+    check_compilation:
+      needs: check_coding_style
+      runs-on: ubuntu-latest
+      container:
+        image: epitechcontent/epitest-docker:latest
+      steps:
+        - name: Checkout
+          uses: actions/checkout@v4
+          with:
+            fetch-depth: 0
+        - name: make
+          run: make
+          timeout-minutes: 2
+        - name: clean
+          run: make clean
+        - name: check_binary
+          run: |
+            variable = $EXECUTABLE
+            for filename in ${variable//,/ }; do
+            if ! test -e "$file_name"; then
+            echo "file doesn't exists."
+            fi
+            done
