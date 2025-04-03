@@ -13,7 +13,8 @@ jobs:
           with:
             fetch-depth: 0
         - name: test
-          run: echo "TESTESTESTESTESTST CECI EST UN TEST\n"
+          run: python3 <<EOF
+            print("echo"TEST ??\n"")
         - name: execute check.sh
           run: check.sh $(pwd) $(pwd)
         - name: parse and display coding-style-reports.log
