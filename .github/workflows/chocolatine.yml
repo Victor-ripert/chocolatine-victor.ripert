@@ -43,18 +43,12 @@ jobs:
           run: make clean
         - name: check_binary
           run: |
-            echo "before variable assignation"
             variable="a.out,my_segfault,mysh"
-            echo "after variable assignation"
-            echo $variable
-            echo "après display variable"
+            IFS=','
             for filename in $variable; do
-            echo "dans boucle"
-            if ! test -e "$file_name"; then
-            echo "dans condition"
-            echo "file doesn't exists."
+            if ! test -e "$filename"; then
+            echo "$filename: file doesn't exists."
+            exit 1
             fi
-            echo "file exist"
-            echo "fin condition"
             done
-            echo "fin boucle"
+            exit 0
