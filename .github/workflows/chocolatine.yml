@@ -3,7 +3,6 @@ run-name: ${{ github.actor }} -> Chocolatine is running on ${{ github.repository
 on: [push, pull_request]
 jobs:
     check_coding_style:
-      # if: github.repository != 'EpitechPGEPromo2029/B-DOP-200-PAR-2-1-chocolatine-victor.ripert' && !startsWith(github.repository, 'ga-ignore-')
       runs-on: ghcr.io/epitech/coding-style-checker:latest
       steps:
         - name: Checkout
