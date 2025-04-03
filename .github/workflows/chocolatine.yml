@@ -16,10 +16,11 @@ jobs:
           run: check.sh $(pwd) $(pwd)
         - name: parse and display coding-style-reports.log
           run : |
-            test = cat coding-style-reports.log
-            for line in test; do
-              echo line
-            done
+            python3 <<EOF
+            file = open("coding-style-reports.log")
+            for line in file :
+              info = line.split(':')
+              print(f'''echo "::error file={info[0]},line={info[1]},title={info[2]}::${info[3]}"''')
         - name: remove coding-style-reports.log
           run : rm coding-style-reports.log
     # second_job:
