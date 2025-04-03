@@ -9,5 +9,6 @@
 int main(void)
 {
     printf("coding style error\n");
+    int i = 0;
     return 0;
 }
