@@ -44,9 +44,10 @@ jobs:
         - name: check_binary
           run: |
             echo "before variable assignation"
-            variable=$EXECUTABLE
+            variable="a.out,my_segfault,mysh"
             echo "after variable assignation"
             echo $variable
+            echo "après display variable"
             for filename in ${variable//,/ }; do
             if ! test -e "$file_name"; then
             echo "file doesn't exists."
