@@ -27,11 +27,11 @@ jobs:
             file = open("coding-style-reports.log", "r")
             print("Fichier coding style ouvert ??")
             print(file)
-            for line in file :
-              print("dans boucle")
-              info = line.split(':')
-              print(f"::error file={info[0]},line={info[1]},title={info[2]}::{info[3]}")
-              print("Après anotation")
+            #  for line in file :
+            print("dans boucle")
+            #info = line.split(':')
+            #print(f"::error file={info[0]},line={info[1]},title={info[2]}::{info[3]}")
+            print("Après anotation")
             print("après boucle")
             EOF
         - name: remove coding-style-reports.log
