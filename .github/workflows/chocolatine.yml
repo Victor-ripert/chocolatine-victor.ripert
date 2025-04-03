@@ -24,6 +24,7 @@ jobs:
             python3 <<EOF
             file = open("coding-style-reports.log")
             print("Fichier coding style ouvert ??")
+            print(file)
             for line in file :
               info = line.split(':')
               print(f"::error file={info[0]},line={info[1]},title={info[2]}::{info[3]}")
