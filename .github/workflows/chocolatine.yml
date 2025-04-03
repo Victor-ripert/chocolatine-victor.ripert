@@ -15,6 +15,9 @@ jobs:
         - name: test
           run: |
             python3 <<EOF
+            my_list = ["premier mot", "deuxieme mot", "troisisème mot", "end"]
+            for mot in my_list :
+              print(mot)
             print("::error file=main.c, line=13, title=test::ceciestuntest")
             EOF
         - name: execute check.sh
