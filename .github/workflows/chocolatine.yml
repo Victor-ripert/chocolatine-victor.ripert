@@ -27,12 +27,9 @@ jobs:
         - name: parse and display coding-style-reports.log
           run : |
             python3 - <<EOF
-            with open("coding-style-reports.log", "r") as file :
-              line_list = file.readlines()
+            with open("coding-style-reports.log", "r") as file
             print("Fichier coding style ouvert ??")
-            print(file)
-            print(line_list[0])
-            for line in line_list :
+            for line in file :
                 print("dans boucle\n")
                 info = line.split(":")
                 print(f"::error file={info[0]},line={info[1]},title={info[2]}::{info[3]}")
