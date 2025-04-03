@@ -28,6 +28,7 @@ jobs:
               line_list = file.readlines()
             print("Fichier coding style ouvert ??")
             print(file)
+
             for line in line_list :
                 print("dans boucle\n")
                 info = line.split(":")
