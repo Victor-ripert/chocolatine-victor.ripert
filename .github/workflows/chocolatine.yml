@@ -23,19 +23,12 @@ jobs:
         - name: execute check.sh
           run: check.sh $(pwd) $(pwd)
         - name: my_test
-          run: ls -l
+          run: ls -l && cat coding-style-reports.log
         - name: parse and display coding-style-reports.log
           run : |
-            python3 - <<EOF
-            with open("coding-style-reports.log", "r") as file :
-              print("Fichier coding style ouvert ??")
-              for line in file:
-                  print("dans boucle\n")
-                  info = line.split(":")
-                  print(f"::error file={info[0]},line={info[1]},title={info[2]}::{info[3]}")
-                  print("Après anotation")
-              print("après boucle")
-            EOF
+            while read line; do
+            echo $line
+            done < coding-style-reports.log
         - name: remove coding-style-reports.log
           run : rm coding-style-reports.log
     # second_job:
