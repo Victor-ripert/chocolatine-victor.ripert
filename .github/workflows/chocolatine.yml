@@ -23,7 +23,7 @@ jobs:
         - name: execute check.sh
           run: check.sh $(pwd) $(pwd)
         - name: my_test
-          run: ls -l && cat coding-style-reports.log
+          run: cat coding-style-reports.log
         - name: parse and display coding-style-reports.log
           run : |
             while read line; do
