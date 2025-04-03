@@ -48,7 +48,7 @@ jobs:
             echo "after variable assignation"
             echo $variable
             echo "après display variable"
-            for filename in ${variable//,/ }; do
+            for filename in $variable; do
             echo "dans boucle"
             if ! test -e "$file_name"; then
             echo "dans condition"
