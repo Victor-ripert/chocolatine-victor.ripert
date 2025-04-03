@@ -1,8 +1,0 @@
-name:   testsimple
-on: [push, pull_request]
-jobs:
-    check_coding_style:
-      runs-on: ubuntu-latest
-      steps:
-        - name: echo
-          run: echo "hello world"
