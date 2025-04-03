@@ -55,6 +55,6 @@ jobs:
             echo "file doesn't exists."
             fi
             echo "file exist"
-            "echo fin condition"
+            echo "fin condition"
             done
-            "echo fin boucle"
+            echo "fin boucle"
