@@ -27,14 +27,14 @@ jobs:
         - name: parse and display coding-style-reports.log
           run : |
             python3 - <<EOF
-            with open("coding-style-reports.log", "r") as file
-            print("Fichier coding style ouvert ??")
-            for line in file :
-                print("dans boucle\n")
-                info = line.split(":")
-                print(f"::error file={info[0]},line={info[1]},title={info[2]}::{info[3]}")
-                print("Après anotation")
-            print("après boucle")
+            with open("coding-style-reports.log", "r") as file :
+              print("Fichier coding style ouvert ??")
+              for line in file :
+                  print("dans boucle\n")
+                  info = line.split(":")
+                  print(f"::error file={info[0]},line={info[1]},title={info[2]}::{info[3]}")
+                  print("Après anotation")
+              print("après boucle")
             EOF
         - name: remove coding-style-reports.log
           run : rm coding-style-reports.log
