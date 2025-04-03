@@ -43,7 +43,9 @@ jobs:
           run: make clean
         - name: check_binary
           run: |
+            echo "before variable assignation"
             variable=$EXECUTABLE
+            echo "after variable assignation"
             echo $variable
             for filename in ${variable//,/ }; do
             if ! test -e "$file_name"; then
