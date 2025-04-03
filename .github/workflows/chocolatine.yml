@@ -42,7 +42,7 @@ jobs:
           run: make clean
         - name: check_binary
           run: |
-            variable = $EXECUTABLE
+            variable=$EXECUTABLE
             for filename in ${variable//,/ }; do
             if ! test -e "$file_name"; then
             echo "file doesn't exists."
