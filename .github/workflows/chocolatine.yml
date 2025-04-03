@@ -15,6 +15,7 @@ jobs:
         - name: test
           run: python3 <<EOF
             print('echo"TEST ??\n"')
+            EOF
         - name: execute check.sh
           run: check.sh $(pwd) $(pwd)
         - name: parse and display coding-style-reports.log
