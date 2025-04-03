@@ -5,14 +5,9 @@
 ** main.c
 */
 #include <stdio.h>
-#include <stddef.h>
-#include <stdlib.h>
-#include "mysh.h"
 
-int main(UNUSED int argc, UNUSED char **argv, char **env)
+int main(void)
 {
-    printf("coding style error");
-    int result = shell_loop(env);
-
-    return result;
+    printf("coding style error\n");
+    return 0;
 }

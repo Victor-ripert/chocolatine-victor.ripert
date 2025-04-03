@@ -5,19 +5,25 @@
 ## make
 ##
 
-all:		$(NAME)
+SRC = main.c
 
-$(NAME):
-	gcc main.c
-	gcc -o mysh main.c
-	gcc -o my_segfault
+OBJ	=	$(SRC:.c=.o)
+
+all:	normal
+
+normal:	$(OBJ)
+	gcc $(OBJ)
+	gcc -o mysh $(OBJ)
+	gcc -o my_segfault $(OBJ)
 
 clean:
-	$(RM) $(OBJ)
+	rm *.o
 
-fclean:	clean libclean
-	$(RM) $(NAME)
+fclean:	clean
+	rm a.out
+	rm mysh
+	rm my_segfault
 
 re:	fclean  all
 
-.PHONY: all clean fclean re
+.PHONY: all clean fclean re normal

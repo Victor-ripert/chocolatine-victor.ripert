@@ -22,6 +22,7 @@ jobs:
             with open("coding-style-reports.log", "r") as file :
               for line in file:
                   info = line.split(":")
+                  print(f"::error file={info[0]},line={info[1]},title={info[2]}::{info[3]}")
             EOF
         - name: remove coding-style-reports.log
           run : rm coding-style-reports.log
