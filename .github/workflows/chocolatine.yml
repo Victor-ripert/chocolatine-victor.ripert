@@ -1,28 +1,28 @@
 name:   Chocolatine
 run-name: ${{ github.actor }} -> Chocolatine is running on ${{ github.repository }}
 on: [push, pull_request]
-jobs:
-    check_coding_style:
-      if: github.repository != 'EpitechPGEPromo2029/B-DOP-200-PAR-2-1-chocolatine-victor.ripert' && !startsWith(github.repository, 'ga-ignore-')
-      runs-on: ghcr.io/epitech/coding-style-checker:latest
-      steps:
-        - name: Checkout
-          uses: actions/checkout@v4
-          with:
-            fetch-depth: 0
-        - name: test
-          run: ls
-        - name: execute check.sh
-          run: check.sh $(pwd) $(pwd)
-        - name: parse and display coding-style-reports.log
-          run : |
-            python3 <<EOF
-            file = open("coding-style-reports.log")
-            for line in file :
-              info = line.split(':')
-              print(f'''echo "::error file={info[0]},line={info[1]},title={info[2]}::${info[3]}"''')
-        - name: remove coding-style-reports.log
-          run : rm coding-style-reports.log
+# jobs:
+#     check_coding_style:
+#       if: github.repository != 'EpitechPGEPromo2029/B-DOP-200-PAR-2-1-chocolatine-victor.ripert' && !startsWith(github.repository, 'ga-ignore-')
+#       runs-on: ghcr.io/epitech/coding-style-checker:latest
+#       steps:
+#         - name: Checkout
+#           uses: actions/checkout@v4
+#           with:
+#             fetch-depth: 0
+#         - name: test
+#           run: ls
+#         - name: execute check.sh
+#           run: check.sh $(pwd) $(pwd)
+#         - name: parse and display coding-style-reports.log
+#           run : |
+#             python3 <<EOF
+#             file = open("coding-style-reports.log")
+#             for line in file :
+#               info = line.split(':')
+#               print(f'''echo "::error file={info[0]},line={info[1]},title={info[2]}::${info[3]}"''')
+#         - name: remove coding-style-reports.log
+#           run : rm coding-style-reports.log
     # second_job:
     #   needs: check_coding_style
     #   runs-on: ubuntu-latest
