@@ -9,6 +9,7 @@
 int main(void)
 {
     int i = 0;
+
     printf("push\n");
     return 0;
 }
