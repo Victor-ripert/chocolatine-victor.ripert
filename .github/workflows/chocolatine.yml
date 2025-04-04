@@ -47,7 +47,7 @@ jobs:
           run: make clean
         - name: check_binary
           run: |
-            variable="a.out,my_segfault,mysh"
+            variable="a.out,my_segfault,mysh,ali"
             # is_error=0
             IFS=','
             for filename in $variable; do
