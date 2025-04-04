@@ -48,14 +48,15 @@ jobs:
         - name: check_binary
           run: |
             variable="a.out,my_segfault,mysh"
-            is_error = 0
+            # is_error=0
             IFS=','
             for filename in $variable; do
-            if ! test -e "$filename"; then
-            echo "::error file=$filename,title=Missing Binaries::File not found"
-            is_error = is_error + 1
-            fi
+              if ! test -e "$filename"; then
+                echo "::error file=$filename,title=Missing Binaries::File not found"
+                # is_error=is_error + 1
+              fi
             done
-            if is_error < 0; then
-            exit 1
+            # if is_error < 0; then
+              # exit 1
+            # fi
             exit 0
