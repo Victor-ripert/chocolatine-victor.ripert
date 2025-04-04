@@ -47,11 +47,12 @@ jobs:
           run: make clean
         - name: check_binary
           run: |
-            variable="a.out,my_segfault,mysh"
+            variable=$EXECUTABLES
             is_error=0
             IFS=','
+            ls
             for filename in $variable; do
-              if ! test -e "$filename"; then
+              if ! test -x "$filename"; then
                 echo "::error file=$filename,title=Missing Binaries::File not found"
                 is_error=is_error + 1
               fi
