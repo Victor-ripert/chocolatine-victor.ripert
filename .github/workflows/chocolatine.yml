@@ -19,13 +19,13 @@ jobs:
         - name: parse and display coding-style-reports.log
           run : |
             python3 - <<EOF
-            is_error = false
+            is_error = False
             with open("coding-style-reports.log", "r") as file :
               for line in file:
-                  is_error = true
+                  is_error = True
                   info = line.split(":")
                   print(f"::error file={info[0]},line={info[1]},title={info[2]}::{info[3]}")
-              if is_error == true :
+              if is_error == True :
                 exit(1)
             EOF
         - name: remove coding-style-reports.log
