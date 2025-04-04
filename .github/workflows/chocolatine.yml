@@ -24,7 +24,7 @@ jobs:
               for line in file:
                   is_error = True
                   info = line.split(":")
-                  print(f"::error file={info[0]},line={info[1]},title={info[2]}::{info[3]}")
+                  print(f"::notice file={info[0]},line={info[1]},title={info[2]}::{info[3]}")
               if is_error == True :
                 exit(1)
             EOF
@@ -50,9 +50,7 @@ jobs:
             variable=$EXECUTABLES
             is_error=0
             IFS=','
-            ls
             for filename in $variable; do
-              echo $filename
               if ! test -x "$filename"; then
                 echo "::error file=$filename,title=Missing Binaries::File not found"
                 is_error=is_error + 1
@@ -62,3 +60,14 @@ jobs:
               exit 1
             fi
             exit 0
+    run_test:
+      needs: check_compilation
+      runs-on: ubuntu-latest
+      container:
+        image: epitechcontent/epitest-docker:latest
+      steps:
+        - name: Checkout
+          uses: actions/checkout@v4
+          with:
+            fetch-depth: 0
+        
