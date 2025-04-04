@@ -5,6 +5,7 @@ env:
   EXECUTABLES: "a.out,my_segfault,mysh"
   MIRROR_URL: ${{ secrets.MIRROR_URL_SECRET }} #git@github.com:EpitechPGEPromo2029/B-DOP-200-PAR-2-1-chocolatine-victor.ripert.git
 jobs:
+    #--------------
     # check_coding_style:
     #   if: github.repository != 'EpitechPGEPromo2029/B-DOP-200-PAR-2-1-chocolatine-victor.ripert' && !startsWith(github.repository, 'ga-ignore-')
     #   runs-on: ubuntu-latest
