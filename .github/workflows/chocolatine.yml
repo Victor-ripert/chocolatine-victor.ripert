@@ -19,10 +19,14 @@ jobs:
         - name: parse and display coding-style-reports.log
           run : |
             python3 - <<EOF
+            is_error = false
             with open("coding-style-reports.log", "r") as file :
               for line in file:
+                  is_error = true
                   info = line.split(":")
                   print(f"::error file={info[0]},line={info[1]},title={info[2]}::{info[3]}")
+              if is_error = true :
+                exit(1)
             EOF
         - name: remove coding-style-reports.log
           run : rm coding-style-reports.log
@@ -44,11 +48,14 @@ jobs:
         - name: check_binary
           run: |
             variable="a.out,my_segfault,mysh"
+            is_error = 0
             IFS=','
             for filename in $variable; do
             if ! test -e "$filename"; then
-            echo "$filename: file doesn't exists."
-            exit 1
+            echo "::error file=$filename,title=Missing Binaries::File not found"
+            is_error = is_error + 1
             fi
             done
+            if is_error < 0; then
+            exit 1
             exit 0
