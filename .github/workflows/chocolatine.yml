@@ -52,6 +52,7 @@ jobs:
             IFS=','
             ls
             for filename in $variable; do
+              echo $filename
               if ! test -x "$filename"; then
                 echo "::error file=$filename,title=Missing Binaries::File not found"
                 is_error=is_error + 1
