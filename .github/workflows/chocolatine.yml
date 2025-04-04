@@ -3,80 +3,79 @@ run-name: ${{ github.actor }} -> Chocolatine is running on ${{ github.repository
 on: [push, pull_request]
 env:
   EXECUTABLES: "a.out,my_segfault,mysh"
-  MIRROR_URL: ${{ secrets.MIRROR_URL_SECRET }} #git@github.com:EpitechPGEPromo2029/B-DOP-200-PAR-2-1-chocolatine-victor.ripert.git
+  MIRROR_URL: git@github.com:EpitechPGEPromo2029/B-DOP-200-PAR-2-1-chocolatine-victor.ripert.git
 jobs:
-    #--------------
-    # check_coding_style:
-    #   if: github.repository != 'EpitechPGEPromo2029/B-DOP-200-PAR-2-1-chocolatine-victor.ripert' && !startsWith(github.repository, 'ga-ignore-')
-    #   runs-on: ubuntu-latest
-    #   container:
-    #     image: ghcr.io/epitech/coding-style-checker:latest
-    #   steps:
-    #     - name: Checkout
-    #       uses: actions/checkout@v4
-    #       with:
-    #         fetch-depth: 0
-    #     - name: execute check.sh
-    #       run: check.sh $(pwd) $(pwd)
-    #     - name: parse and display coding-style-reports.log
-    #       run : |
-    #         python3 - <<EOF
-    #         is_error = False
-    #         with open("coding-style-reports.log", "r") as file :
-    #           for line in file:
-    #               is_error = True
-    #               info = line.split(":")
-    #               print(f"::error file={info[0]},line={info[1]},title={info[2]}::{info[3]}")
-    #           if is_error == True :
-    #             exit(1)
-    #         EOF
-    #     - name: remove coding-style-reports.log
-    #       run : rm coding-style-reports.log
-    # check_compilation:
-    #   needs: check_coding_style
-    #   runs-on: ubuntu-latest
-    #   container:
-    #     image: epitechcontent/epitest-docker:latest
-    #   steps:
-    #     - name: Checkout
-    #       uses: actions/checkout@v4
-    #       with:
-    #         fetch-depth: 0
-    #     - name: make
-    #       run: make
-    #       timeout-minutes: 2
-    #     - name: clean
-    #       run: make clean
-    #     - name: check_binary
-    #       run: |
-    #         variable=$EXECUTABLES
-    #         is_error=0
-    #         IFS=','
-    #         for filename in $variable; do
-    #           if ! test -x "$filename"; then
-    #             echo "::error file=$filename,title=Missing Binaries::File not found"
-    #             is_error=is_error + 1
-    #           fi
-    #         done
-    #         if is_error < 0; then
-    #           exit 1
-    #         fi
-    #         exit 0
-    # run_tests:
-    #   needs: check_compilation
-    #   runs-on: ubuntu-latest
-    #   container:
-    #     image: epitechcontent/epitest-docker:latest
-    #   steps:
-    #     - name: Checkout
-    #       uses: actions/checkout@v4
-    #       with:
-    #         fetch-depth: 0
-    #     - name: run_tests
-    #       run: make tests_run
-    #       timeout-minutes: 2
+    check_coding_style:
+      if: github.repository != 'EpitechPGEPromo2029/B-DOP-200-PAR-2-1-chocolatine-victor.ripert' && !startsWith(github.repository, 'ga-ignore-')
+      runs-on: ubuntu-latest
+      container:
+        image: ghcr.io/epitech/coding-style-checker:latest
+      steps:
+        - name: Checkout
+          uses: actions/checkout@v4
+          with:
+            fetch-depth: 0
+        - name: execute check.sh
+          run: check.sh $(pwd) $(pwd)
+        - name: parse and display coding-style-reports.log
+          run : |
+            python3 - <<EOF
+            is_error = False
+            with open("coding-style-reports.log", "r") as file :
+              for line in file:
+                  is_error = True
+                  info = line.split(":")
+                  print(f"::error file={info[0]},line={info[1]},title={info[2]}::{info[3]}")
+              if is_error == True :
+                exit(1)
+            EOF
+        - name: remove coding-style-reports.log
+          run : rm coding-style-reports.log
+    check_compilation:
+      needs: check_coding_style
+      runs-on: ubuntu-latest
+      container:
+        image: epitechcontent/epitest-docker:latest
+      steps:
+        - name: Checkout
+          uses: actions/checkout@v4
+          with:
+            fetch-depth: 0
+        - name: make
+          run: make
+          timeout-minutes: 2
+        - name: clean
+          run: make clean
+        - name: check_binary
+          run: |
+            variable=$EXECUTABLES
+            is_error=0
+            IFS=','
+            for filename in $variable; do
+              if ! test -x "$filename"; then
+                echo "::error file=$filename,title=Missing Binaries::File not found"
+                is_error=is_error + 1
+              fi
+            done
+            if is_error < 0; then
+              exit 1
+            fi
+            exit 0
+    run_tests:
+      needs: check_compilation
+      runs-on: ubuntu-latest
+      container:
+        image: epitechcontent/epitest-docker:latest
+      steps:
+        - name: Checkout
+          uses: actions/checkout@v4
+          with:
+            fetch-depth: 0
+        - name: run_tests
+          run: make tests_run
+          timeout-minutes: 2
     push_to_mirror:
-      # needs: run_tests
+      needs: run_tests
       runs-on: ubuntu-latest
       steps:
         - uses: actions/checkout@v4
